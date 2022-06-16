@@ -1,0 +1,23 @@
+<div class="text-center">
+<h1>ボード一覧</h1>
+
+<%= @boards.count %>
+
+<% @boards.each do |board| %>
+  <tr>
+    <td><p><%= link_to board.title, board_path(board) %></p></td>
+<hr>
+        <%# <%= board.users.count %>
+
+    <% if false %>
+    <td>
+      <% if board.users.include?(current_user) %>
+        <%= button_to "退会", board_path(@board), method: :delete, class: "btn btn-sm" %>
+      <% else %>
+        <%= link_to "参加", board_join_path(@board), class: "btn btn-sm" %>
+      <% end %>
+    <% end %>
+    </td>
+  </tr>
+<% end %>
+</div>

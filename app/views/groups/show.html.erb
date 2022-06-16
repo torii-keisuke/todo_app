@@ -1,0 +1,8 @@
+<div class="text-center">
+  <h1 class="text-2xl">ユーザー詳細</h1>
+  <span><%= @user.name %></span>
+  <%= form_with model: @board, url: invitation_group_path(@user.id), method: :post, local: true do |f| %>
+    <%= f.collection_select(:board_id, @boards, :id, :title, prompt: "選択してください。") %><br>
+    <%= f.submit "招待", class: "btn" %>
+  <% end %>
+</div>

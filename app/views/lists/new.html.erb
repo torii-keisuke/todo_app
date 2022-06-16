@@ -1,0 +1,9 @@
+<%= form_with model: @list, url: lists_path, method: :post, local: true do |f| %>
+  <div class="text-xl font-light text-center mt-10">
+    <%= f.label :content, "リスト名" %>
+    <%= f.text_field :content %>
+    <div class="text-center">
+      <%= f.submit "作成", class: 'btn' %>
+    </div>
+  </div>
+<% end %>

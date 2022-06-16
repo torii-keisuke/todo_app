@@ -1,0 +1,9 @@
+<%= form_with model: @board, local: true do |f| %>
+  <div class="text-center">
+    <%= f.label :title, "ボード名" %>
+    <%= f.text_field :title %>
+  </div>
+  <div class="text-center">
+    <%= f.submit "作成", class: 'btn' %>
+  </div>
+<% end %>

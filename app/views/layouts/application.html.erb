@@ -11,6 +11,20 @@
   </head>
 
   <body>
+    <header class="navbar navbar-fixed-top navbar-inverse bg-yellow-200 text-4xl">
+      <%= link_to "todo app", root_path, id: "logo" %>
+      <% if current_user.present? %>
+        <%= button_to "ログアウト", destroy_user_session_path, class: "text-right text-base", method: :delete %>
+        <%= current_user.name %>
+      <% else %>
+        <%= link_to "ログイン", user_session_path, class: "text-right text-base" %>
+      <% end %>
+      <%= link_to "新規ボード作成", new_board_path, class: "text-right text-base" %>
+      <%= link_to "新規リスト作成", new_list_path, class: "text-right text-base" %>
+      <%= link_to "ボード一覧", boards_path, class: "text-right text-base" %>
+      <%= link_to "ユーザー一覧", groups_path, class: "text-right text-base" %>
+
+    </header>
     <%= yield %>
   </body>
 </html>
