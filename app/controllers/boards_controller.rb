@@ -1,4 +1,5 @@
 class BoardsController < ApplicationController
+  before_action :authenticate_user!, except: [:show, :index]
 
   def index
     if current_user.present?
@@ -11,6 +12,7 @@ class BoardsController < ApplicationController
   end
 
   def create
+    #ログインしていないユーザーはboards/newページに行けないようにする。
     @board = Board.new(board_params)
     if @board.save
       Group.create(user_id: current_user.id, board_id: @board.id)

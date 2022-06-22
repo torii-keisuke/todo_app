@@ -1,8 +1,5 @@
 class ListsController < ApplicationController
-
-  def index
-    @lists = List.all
-  end
+  before_action :authenticate_user!
 
   def new
     @list = List.new

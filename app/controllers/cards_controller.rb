@@ -1,4 +1,5 @@
 class CardsController < ApplicationController
+  before_action :authenticate_user!
 
   def new
     @card = Card.new
@@ -20,12 +21,14 @@ class CardsController < ApplicationController
   def edit
     @board = Board.find(params[:board_id])
     @list = List.find(params[:list_id])
+    @lists = List.where(board_id: @board.id)
     @card = Card.find(params[:id])
   end
 
   def update
     @card = Card.find(params[:id])
     @card.task = params[:card][:task]
+    @card.list_id = params[:card][:list_id]
     if @card.save
       redirect_to board_path(params[:board_id])
     else

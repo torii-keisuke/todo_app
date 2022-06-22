@@ -4,7 +4,7 @@
     <% @lists.each do |list| %>
       <p>
         <%= link_to list.content, edit_board_list_path(@board.id, list.id) %>
-        <% @cards.each do |card| %>
+        <% list.cards.each do |card| %>
           <%= link_to card.task, edit_board_list_card_path(@board.id, list.id, card.id) %>
         <% end %>
         <%= link_to "新規カード作成", new_board_list_card_path(@board.id, list.id) %><hr>
