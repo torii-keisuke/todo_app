@@ -4,12 +4,13 @@ Rails.application.routes.draw do
     registrations: 'users/registrations'
   }
 
-  root 'task_mgmt_pages#index'
-
+  root to: "boards#index"
   resources :users
-  resources :lists
   resources :boards do
     get "join" => "board#join"
+    resources :lists do
+      resources :cards
+    end
   end
   resources :groups do
     member do

@@ -1,1 +1,7 @@
 <h1>ボード編集</h1>
+<%= form_with model: @board, url: board_path(@board.id), method: :patch, local: true do |f| %>
+  <%= f.label :title, "ボード名" %>
+  <%= f.text_field :title %>
+  <%= f.submit "変更", class: 'btn' %>
+<% end %>
+<%= button_to "削除", board_path(@board.id), { method: :delete, form: { data: { confirm: "本当に削除しますか？" } } } %>

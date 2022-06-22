@@ -1,9 +1,8 @@
 <div class="text-center">
-<h1>ユーザー一覧</h1>
-<% @users.each do |user| %>
-  <p><%= link_to user.name, group_path(user.id), method: :get %></p>
-  <p><%= user.name %></p>
-  <p><%= user.id %></p>
-  <hr>
-<% end %>
+  <h1>ユーザー一覧</h1>
+  <% @users.each do |user| %>
+    <p>
+      <%= link_to user.name, group_path(user.id), method: :get %></p>
+    </p><hr>
+  <% end %>
 </div>

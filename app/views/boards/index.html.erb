@@ -1,23 +1,15 @@
-<div class="text-center">
-<h1>ボード一覧</h1>
-
-<%= @boards.count %>
-
-<% @boards.each do |board| %>
-  <tr>
-    <td><p><%= link_to board.title, board_path(board) %></p></td>
-<hr>
-        <%# <%= board.users.count %>
-
-    <% if false %>
-    <td>
-      <% if board.users.include?(current_user) %>
-        <%= button_to "退会", board_path(@board), method: :delete, class: "btn btn-sm" %>
-      <% else %>
-        <%= link_to "参加", board_join_path(@board), class: "btn btn-sm" %>
+<div class="pt-5 text-center">
+  <% if current_user.present? %>
+    <% if @boards.present? %>
+      <h1 class="text-2xl"><%= current_user.name%>のボード一覧</h1>
+      <% @boards.each do |board| %>
+      <p><%= link_to board.title, board_path(board.id) %></p><hr>
       <% end %>
+    <% else %>
+      <h1>新規ボードを作成してください。</h1>
+      <%= link_to "ボードを作成する", new_board_path, class: "text-blue-700" %>
     <% end %>
-    </td>
-  </tr>
-<% end %>
+  <% else %>
+    <h1><%= link_to "ログイン", new_user_session_path, class: "text-blue-700" %>してください。初めてご利用される方は、<%= link_to "新規登録", new_user_registration_path, class: "text-blue-700" %>してください。</h1>
+  <% end %>
 </div>

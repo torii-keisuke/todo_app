@@ -1,0 +1,9 @@
+<%= form_with model: @card, url: board_list_cards_path(@board.id, @list.id), method: :post, local: true do |f| %>
+  <div class="text-xl font-light text-center mt-10">
+    <%= f.label :task, "カード名" %>
+    <%= f.text_field :task %>
+    <div class="text-center">
+      <%= f.submit "作成", class: 'btn' %>
+    </div>
+  </div>
+<% end %>
