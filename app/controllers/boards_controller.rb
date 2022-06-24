@@ -4,6 +4,9 @@ class BoardsController < ApplicationController
   def index
     if current_user.present?
       @boards = current_user.board
+      @boards.each do |board|
+        @group = Group.where(board_id: board.id, user_id: current_user.id)
+      end
     end
   end
 
@@ -12,7 +15,6 @@ class BoardsController < ApplicationController
   end
 
   def create
-    #ログインしていないユーザーはboards/newページに行けないようにする。
     @board = Board.new(board_params)
     if @board.save
       Group.create(user_id: current_user.id, board_id: @board.id)
@@ -24,6 +26,7 @@ class BoardsController < ApplicationController
 
   def show
     @board = Board.find(params[:id])
+    @groups = Group.where(board_id: @board.id).count
     @lists = List.where(board_id: params[:id])
     @lists.each do |list|
       @cards = Card.where(list_id: list.id)
@@ -32,6 +35,8 @@ class BoardsController < ApplicationController
 
   def edit
     @board = Board.find(params[:id])
+    @groups = Group.where(board_id: @board.id)
+    @users = @board.users
   end
 
   def update

@@ -1,8 +1,15 @@
 Rails.application.routes.draw do
+  get 'favorites/create'
+  get 'favorites/destroy'
   devise_for :users, controllers: {
     sessions: 'users/sessions',
-    registrations: 'users/registrations'
+    registrations: 'users/registrations',
+    confirmations: 'users/confirmations'
   }
+
+  devise_scope :user do
+    put "confirmation", to: "users/confirmations#show", as: :back_confirmation
+  end
 
   root to: "boards#index"
   resources :users

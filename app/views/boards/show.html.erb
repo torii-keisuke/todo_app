@@ -1,15 +1,38 @@
-<h1><%= link_to @board.title, edit_board_path %></h1>
-  <%= link_to "新規リスト作成", new_board_list_path(@board.id), class: "text-right text-base" %>
+<div class=" items-center px-5 lg:px-20">
+  <div class="flex flex-col w-full max-w-md p-5 mx-auto my-3 transition duration-500 ease-in-out transform bg-white rounded-lg md:mt-0">
+    <div class="text-center">
+      <h1 class="mt-6 text-3xl font-extrabold text-neutral-600"><%= link_to @board.title, edit_board_path %></h1>
+      <%= "メンバー：#{ @groups }人" %>
+      <div class="relative mt-4 mb-2">
+        <div class="absolute inset-0 flex items-center">
+          <div class="w-full border-t border-gray-300"></div>
+        </div>
+        <div class="relative flex justify-center text-sm">
+            <span class="px-2 text-neutral-600 bg-white"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
   <% if @lists.present? %>
+  <div class="flex">
     <% @lists.each do |list| %>
-      <p>
-        <%= link_to list.content, edit_board_list_path(@board.id, list.id) %>
-        <% list.cards.each do |card| %>
+    <div class="bg-purple-300 mx-10 px-10 pb-3 text-center">
+      <div class="">
+        <%= link_to list.content, edit_board_list_path(@board.id, list.id), class: "block text-lg text-neutral-600 pt-3 font-semibold" %>
+      </div>
+      <% list.cards.each do |card| %>
+        <div class="my-4 bg-green-200">
           <%= link_to card.task, edit_board_list_card_path(@board.id, list.id, card.id) %>
-        <% end %>
-        <%= link_to "新規カード作成", new_board_list_card_path(@board.id, list.id) %><hr>
-      </p>
+        </div>
+      <% end %>
+      <%= link_to "新規カード作成", new_board_list_card_path(@board.id, list.id), class: "block" %>
+    </div>
     <% end %>
+    <%= link_to "新規リスト作成", new_board_list_path(@board.id), class: "text-right text-base mt-3" %>
   <% else %>
     <h1>リストを作成してください。</h1>
+    <%= link_to "新規リスト作成", new_board_list_path(@board.id), class: "text-right text-base mt-3" %>
   <% end %>
+  </div>

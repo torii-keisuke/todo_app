@@ -37,8 +37,8 @@ class CardsController < ApplicationController
   end
 
   def destroy
-    @board = Board.find(params[:board_id])
-    @list = List.find(params[:list_id])
+    # @board = Board.find(params[:board_id])
+    # @list = List.find(params[:list_id])
     @card = Card.find(params[:id])
     if @card.destroy
       redirect_to board_path(params[:board_id])

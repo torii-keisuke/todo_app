@@ -1,8 +1,21 @@
-<div class="text-center">
-  <h1 class="text-2xl">ユーザー詳細</h1>
-  <span><%= @user.name %></span>
-  <%= form_with model: @board, url: invitation_group_path(@user.id), method: :post, local: true do |f| %>
-    <%= f.collection_select(:board_id, @boards, :id, :title, prompt: "選択してください。") %><br>
-    <%= f.submit "招待", class: "btn" %>
-  <% end %>
+<div class=" items-center px-5 lg:px-20">
+  <div class="flex flex-col w-full max-w-md p-5 mx-auto my-3 transition duration-500 ease-in-out transform bg-white rounded-lg md:mt-0">
+    <div class="text-center">
+      <h1 class="mt-6 text-3xl font-extrabold text-neutral-600">ユーザー詳細</h1>
+      <span class="mt-6 text-xl font-semibold text-neutral-600"><%= @user.name %></span>
+
+      <div class="relative mt-4 mb-2">
+        <div class="absolute inset-0 flex items-center">
+          <div class="w-full border-t border-gray-300 mb-6"></div>
+        </div>
+        <div class="relative flex justify-center text-sm">
+        </div>
+      </div>
+
+      <%= form_with model: @board, url: invitation_group_path(@user.id), method: :post, local: true do |f| %>
+        <%= f.collection_select(:board_id, @boards, :id, :title, prompt: "選択してください。") %>
+        <%= f.submit "招待", class: "flex items-center justify-center w-full px-10 py-4 mt-6 text-base font-medium text-center text-white transition duration-500 ease-in-out transform bg-blue-600 rounded-xl hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500" %>
+      <% end %>
+    </div>
+  </div>
 </div>
