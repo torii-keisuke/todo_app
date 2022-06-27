@@ -26,6 +26,7 @@ class BoardsController < ApplicationController
 
   def show
     @board = Board.find(params[:id])
+    @favorite = Favorite.find_by(user_id: current_user.id, board_id: @board.id)
     @groups = Group.where(board_id: @board.id).count
     @lists = List.where(board_id: params[:id])
     @lists.each do |list|

@@ -1,7 +1,24 @@
 <div class=" items-center px-5 lg:px-20">
   <div class="flex flex-col w-full max-w-md p-5 mx-auto my-3 transition duration-500 ease-in-out transform bg-white rounded-lg md:mt-0">
     <div class="text-center">
-      <h1 class="mt-6 text-3xl font-extrabold text-neutral-600"><%= link_to @board.title, edit_board_path %></h1>
+      <h1 class="mt-6 text-3xl font-extrabold text-neutral-600">
+        <%= link_to @board.title, edit_board_path %>
+      </h1>
+
+      <% if Favorite.find_by(user_id: current_user.id, board_id: params[:id]) %>
+        <%= button_to board_favorite_path(@board.id, @favorite.id), method: :delete do %>
+          <div class="p-2 bg-stone-400 rounded-xl m-1">
+            <i class="fa fa-solid fa-star" style="color: yellow;"></i>
+          </div>
+        <% end %>
+      <% else %>
+        <%= button_to board_favorites_path(@board.id), method: :post do %>
+          <div class="p-2 bg-stone-400 rounded-xl m-1">
+            <i class="fa fa-regular fa-star"></i>
+          </div>
+        <% end %>
+      <% end %>
+
       <%= "メンバー：#{ @groups }人" %>
       <div class="relative mt-4 mb-2">
         <div class="absolute inset-0 flex items-center">

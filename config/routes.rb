@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
-  get 'favorites/create'
-  get 'favorites/destroy'
+
   devise_for :users, controllers: {
     sessions: 'users/sessions',
     registrations: 'users/registrations',
@@ -15,6 +14,7 @@ Rails.application.routes.draw do
   resources :users
   resources :boards do
     get "join" => "board#join"
+    resources :favorites, only: [:create, :destroy]
     resources :lists do
       resources :cards
     end
